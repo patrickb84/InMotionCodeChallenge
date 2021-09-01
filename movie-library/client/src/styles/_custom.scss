@@ -2,4 +2,21 @@ html,
 body,
 #root {
   height: 100%;
+  background-color: darkslategrey;
 }
+
+main {
+  height: 100%;
+  padding: 2rem 0;
+}
+
+.main {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+// #root {
+//   background-color: aqua !important;
+// }

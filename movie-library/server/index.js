@@ -14,7 +14,7 @@ let db = new sqlite3.Database('./db/movie-library.db', err => {
   console.log('Connected to the SQlite database.');
 });
 
-app.get('/movies', (req, res) => {
+app.get('/api/movies', (req, res) => {
   const sql = 'SELECT * FROM movie';
   db.all(sql, (err, rows) => {
     console.log(rows);
@@ -22,7 +22,7 @@ app.get('/movies', (req, res) => {
   });
 });
 
-app.post('/movie', (req, res) => {
+app.post('/api/movies', (req, res) => {
   const { title, year, rating, poster } = req.body;
   const sql =
     'INSERT INTO movie (title, year, rating, poster) VALUES (?,?,?,?);';
@@ -36,7 +36,7 @@ app.post('/movie', (req, res) => {
   });
 });
 
-app.delete('/movie/:id', (req, res) => {
+app.delete('/api/movies/:id', (req, res) => {
   const { id } = req.params;
   const sql = 'DELETE FROM movie WHERE id = ?';
 
@@ -45,7 +45,7 @@ app.delete('/movie/:id', (req, res) => {
   });
 });
 
-app.put('/movie', (req, res) => {
+app.put('/api/movies', (req, res) => {
   const { title, year, rating, poster, id } = req.body;
   const sql =
     'UPDATE movie SET title = ?, year = ?, rating = ?, poster = ? WHERE id = ?';

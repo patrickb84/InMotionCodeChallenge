@@ -1,0 +1,29 @@
+// server/index.js
+
+const express = require('express');
+const app = express();
+const db = require('./db/config');
+
+const PORT = process.env.PORT || 3001;
+
+const cors = require('cors');
+app.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// API Routes
+app.use('/api/movies', require('./routes/movie-routes'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'));
+});
+
+const server = app.listen(PORT, () => {
+  console.log(`App is up and running. Listening on port ${PORT}`);
+});
+
+process.on('SIGINT', () => {
+  console.log('CLOSE UP');
+  db.close();
+  server.close();
+});
